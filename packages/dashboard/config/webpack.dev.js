@@ -7,16 +7,16 @@ const packageJson = require('../package.json');
 const devConfig = {
   mode: 'development',
   output: {
-    publicPath: 'http://localhost:8083/'
+    publicPath: 'http://localhost:8083/',
   },
   devServer: {
     port: 8083,
     historyApiFallback: {
-      index: '/index.html',
+      historyApiFallback: true,
     },
     headers: {
-      'Access-Control-Allow-Origin': '*' // allows a bunch of different fonts (CORS)
-    }
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -25,7 +25,7 @@ const devConfig = {
       exposes: {
         './DashboardApp': './src/bootstrap',
       },
-      shared: packageJson.dependencies
+      shared: packageJson.dependencies,
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
